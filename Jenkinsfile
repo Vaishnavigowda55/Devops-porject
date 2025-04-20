@@ -11,14 +11,14 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building for the Docker Image...'
-                sh 'docker build -t my-python-app .'
+                bat 'docker build -t my-python-app .'
             }
         }
 
         stage('Run') {
             steps {
                 echo 'Running the Docker container...'
-                sh 'docker run -d -p 5000:5000 my-python-app'
+                bat 'docker run -d -p 5000:5000 my-python-app'
             }
         }
     }
