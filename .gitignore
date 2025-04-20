@@ -1,0 +1,7 @@
+# Ignore env files
+*.env
+
+# OR specific:
+prod.env
+dev.env
+stag.env
