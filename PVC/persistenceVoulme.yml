@@ -3,7 +3,7 @@ kind: PersistentVolume
 metadata:
   name: mypv
   namespace: demo 
-  lables: 
+  labels: 
     app: local 
 spec:
   capacity:
@@ -12,5 +12,6 @@ spec:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
   storageClassName: local-storage
-  hostPath: /mnt/data
+  hostPath: 
+    path: /mnt/data
   
