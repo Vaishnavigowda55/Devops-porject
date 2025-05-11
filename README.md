@@ -1,7 +1,7 @@
 # Docker with kubernetes 
 #new one
 
-## connect to server
+##### connect to server
 sudo yum update 
 sudo yum install git 
 sudo yum install docker 
