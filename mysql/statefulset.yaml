@@ -1,31 +1,51 @@
-apiVersion: apps/v1
 kind: StatefulSet
+apiVersion: apps/v1
 metadata:
-  name: mystatefulset
-  namespace: demo 
+  name: mysql-statefulset
+  namespace: demo
+
 spec:
+  serviceName: mysql-service
+  replicas: 3
   selector:
     matchLabels:
-      app: myapp
-  serviceName: mysql-serivce
-  replicas: 2
+      app: mysql
   template:
     metadata:
       labels:
-        app: myapp
+        app: mysql
     spec:
       containers:
-      - name: myapp
-        image: registry.k8s.io/nginx-slim:0.8
+      - name: mysql
+        image: mysql:8.0
         ports:
         - containerPort: 3306
-          name: web
+        resources:
+          requests:
+            cpu: 100m
+            memory: 128Mi
+          limits:
+            cpu: 200m
+            memory: 25Mi
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
+
+        - name: MYSQL_DATABASE
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-config-map
+              key: MYSQL_DATABASE 
         volumeMounts:
-        - name: www
-          mountPath: /usr/share/nginx/html
+        - name: mysql-data
+          mountPath: /var/lib/mysql
+
   volumeClaimTemplates:
   - metadata:
-      name: musql-data
+      name: mysql-data
     spec:
       accessModes: [ "ReadWriteOnce" ]
       resources:

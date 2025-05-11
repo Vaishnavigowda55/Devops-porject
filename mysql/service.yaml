@@ -1,14 +1,14 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name:  mysql-serivce
+  name: mysql-service
   namespace: demo
 spec:
+  clusterIP: None
   selector:
-    app:  myapp
-  type: ClusterIP 
+    app: mysql
   ports:
-  - name:  mysql
+  - name: mysql
     protocol: TCP
     port: 3306
-    targetPort:  3306
+    targetPort: 3306
