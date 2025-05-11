@@ -2,6 +2,7 @@ apiVersion: apps/v1
 kind:  DaemonSet
 metadata:
   name: apche-daemon
+  namespace: demo 
   labels:
     tier: frontend
 spec:
