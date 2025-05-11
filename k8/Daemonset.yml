@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind:  DaemonSet
+metadata:
+  name: apche-daemon
+  labels:
+    tier: frontend
+spec:
+  template:
+    metadata:
+      labels:
+        tier: frontend
+      name: apche-image
+    spec:
+      containers:
+      - image: httpd:latest
+        name: apche-image
+        ports:
+        - containerPort: 80
+  selector:
+    matchLabels:
+      tier: frontend
